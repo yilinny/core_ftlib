@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdint.h>
 
 void *ft_memchr(const char *s, int c, size_t n)
 {
@@ -57,4 +58,26 @@ int	ft_atoi(const char *s)
 		str++;
 	}
 	return (final * sign);
+}
+
+void *ft_calloc(size_t n, size_t esize)
+{
+    unsigned char *final;
+    size_t i;
+    
+    if (n == 0 || esize == 0)
+        return (malloc(1));
+    if (n > SIZE_MAX/ esize)
+        return (NULL);
+    i = 0;
+    final = malloc(n * esize);
+    if (final == NULL)
+        return (final);
+    while ( i < n * esize)
+    {
+        final[i] = 0;
+        i ++;
+    }
+    return((void *)final);
+
 }
