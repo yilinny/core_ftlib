@@ -3,16 +3,13 @@
 
 size_t ft_strlen(const char *s)
 {
-    int index;
-    size_t count;
+    size_t index;
     index = 0;
-    count = 1;
-    while (s[index] != '\0')
+    while (s[index])
     {
-        count++;
         index++;
     }
-    return (count);
+    return (index);
 }
 
 size_t ft_strlcpy(char *dst, const char *src, size_t size)
@@ -51,4 +48,34 @@ size_t ft_strlcat(char *dest, const char *src, size_t size)
     }
     dest[i] = '\0';
     return (d_size + ft_strlen(src));
+}
+
+char *ft_strchr(const char *s, int c)
+{
+    int index;
+    index = 0;
+    char *final;
+    final = (char *)s;
+    while (s[index] != '\0')
+    {
+        if (s[index] == c)
+            return (final + index);
+        index ++;
+    }
+    return(NULL);
+}
+
+char *ft_strrchr(const char *s, int c)
+{
+    int index;
+    char *final;
+    index = (int)ft_strlen(s);
+    final = (char *)s;
+    while (index >= 0)
+    {
+        if (s[index] == c)
+            return(final + index);
+        index --;
+    }
+    return (NULL);
 }

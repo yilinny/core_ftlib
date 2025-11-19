@@ -46,6 +46,18 @@ void assert_size_t(const char *test_name, size_t output, size_t expected)
     }
 }
 
+void check_null_ptr(void *ptr)
+{
+    if (ptr == NULL)
+    {
+        printf("%sTest passed: NULL correct%s\n", GREEN, RESET);
+    }
+    else
+    {
+        printf("%sFAIL: NULL expected, but got a non-NULL pointer%p%s\n", RED, ptr, RESET);
+    }
+}
+
 // -------------------- Tests --------------------
 
 void test_isalpha()
@@ -126,8 +138,11 @@ void test_memmove()
 {
     char buf[10] = "abcdef";
     ft_memmove(buf + 2, buf, 4); // overlapping
+    char ori_buf[10] = "abcdef";
+    memmove(ori_buf + 2, ori_buf, 4);
     buf[6] = '\0';
-    assert_str("memmove test", buf, "ababcdf");
+    ori_buf[6] = '\0';
+    assert_str("memmove test", buf, ori_buf);
 }
 
 void test_strlcpy()
@@ -146,6 +161,169 @@ void test_strlcat()
     assert_size_t("strlcat return", ret, 7);
 }
 
+void test_tolower()
+{
+    char test1 = 'a';
+    char test2 = '2';
+    char test3 = 'Z';
+
+    assert_int("to_lower test", ft_tolower(test1), 'a');
+    assert_int("to_lower test", ft_tolower(test2), '2');
+    assert_int("to_lower test", ft_tolower(test3), 'z');
+
+}
+void test_toupper()
+{
+    char test1 = 'a';
+    char test2 = '2';
+    char test3 = 'Z';
+
+    assert_int("to_upper test", ft_toupper(test1), 'A');
+    assert_int("to_upper test", ft_toupper(test2), '2');
+    assert_int("to_upper test", ft_toupper(test3), 'Z');
+
+}
+
+void test_ftstrchr()
+{
+    char *ft_one = ft_strchr("aaaaaa", 'b');;
+    if (ft_one == NULL)
+    {
+       printf("Character not found\n");
+    }
+    else
+    {
+        printf("Test one failed. Output: %s\n", ft_one);
+    }
+    char *ft_two = ft_strchr("abbbbdhfcje", 'b');
+    char *ori_two= strchr("abbbbdhfcje", 'b');
+    char *ft_three = ft_strchr("gw242v@", '@');
+    char *ori_three = strchr("gw242v@", '@');
+
+    assert_str("test ftstrchr", ft_two, ori_two);
+    assert_str("test ftstrchr", ft_three, ori_three);
+}
+
+
+void test_ftstrrchr()
+{
+    char *ft_one = ft_strrchr("aaaaaa", 'b');;
+    if (ft_one == NULL)
+    {
+       printf("Character not found\n");
+    }
+    else
+    {
+        printf("Test one failed. Output: %s\n", ft_one);
+    }
+    char *ft_two = ft_strrchr("abbbbdhfcje", 'b');
+    char *ori_two= strrchr("abbbbdhfcje", 'b');
+    char *ft_three = ft_strrchr("gw242v@", '@');
+    char *ori_three = strrchr("gw242v@", '@');
+    char *ft_four = ft_strrchr("gw242v@", '\0');
+    char *ori_four = strrchr("gw242v@", '\0');
+
+    assert_str("test ftstrrchr", ft_two, ori_two);
+    assert_str("test ftstrrchr", ft_three, ori_three);
+    assert_str("test ftstrrchr", ft_four, ori_four);
+
+}
+
+void test_memchr()
+{
+    void *ft1 = ft_memchr("abcdef", 'd', 6);
+    void *ori1 = memchr("abcdef", 'd', 6);
+    void *ft2 = ft_memchr("abcdef", 'a', 6);
+    void *ori2 = memchr("abcdef", 'a', 6);
+    void *ft3 = ft_memchr("abcdef", 'x', 6);
+    check_null_ptr(ft3);
+    void *ft4= ft_memchr("ab\0cd", '\0', 5);
+    void *ori4= memchr("ab\0cd", '\0', 5);
+    void *ft5= ft_memchr("abcdef", 'd', 0);
+    check_null_ptr(ft5);
+
+    assert_str("memchr test", ft1, ori1);
+    assert_str("memchr test", ft2, ori2);
+    assert_str("memchr test", ft4, ori4);
+}
+
+void test_strncmp()
+{
+    int ft1 = ft_strncmp("abcdef", "abcxyz", 3);
+    int ft2 = ft_strncmp("abc", "abd", 5);
+    int ft3 = ft_strncmp("abcx", "abcy", 3);
+    int ft4 = ft_strncmp("ab", "abc", 5);
+    int ft5 = ft_strncmp("abc", "xyz", 0);
+
+    assert_int("strncmp test 1", ft1, strncmp("abcdef", "abcxyz", 3));
+    assert_int("strncmp test 2", ft2, strncmp("abc", "abd", 5));
+    assert_int("strncmp test 3", ft3, strncmp("abcx", "abcy", 3));
+    assert_int("strncmp test 4", ft4, strncmp("ab", "abc", 5));
+    assert_int("strncmp test 5", ft5, strncmp("abc", "xyz", 0));
+}
+
+void test_memcmp()
+{
+    unsigned char a1[] = "abcdef";
+    unsigned char b1[] = "abcdef";
+
+    unsigned char a2[] = "abcXef";
+    unsigned char b2[] = "abcYef";
+
+    unsigned char a3[] = {'a','b','\0','c'};
+    unsigned char b3[] = {'a','b','\0','d'};
+
+    unsigned char a4[] = "\xFF";
+    unsigned char b4[] = "\x01";
+
+    unsigned char a5[] = "abc";
+    unsigned char b5[] = "xyz";
+
+    assert_int("memcmp test 1", ft_memcmp(a1, b1, 6), memcmp(a1, b1, 6));
+    assert_int("memcmp test 2", ft_memcmp(a2, b2, 6), memcmp(a2, b2, 6));
+    assert_int("memcmp test 3", ft_memcmp(a3, b3, 4), memcmp(a3, b3, 4));
+    assert_int("memcmp test 4", ft_memcmp(a4, b4, 1), memcmp(a4, b4, 1));
+    assert_int("memcmp test 5", ft_memcmp(a5, b5, 0), memcmp(a5, b5, 0));
+}
+
+void test_atoi()
+{
+    int ft1 = ft_atoi("1234");
+    int ft2 = ft_atoi("   -42");
+    int ft3 = ft_atoi("4193 with words");
+    int ft4 = ft_atoi("words and 987");
+    int ft5 = ft_atoi("--23468");
+
+    assert_int("atoi test 1", ft1, atoi("1234"));
+    assert_int("atoi test 2", ft2, atoi("   -42"));
+    assert_int("atoi test 3", ft3, atoi("4193 with words"));
+    assert_int("atoi test 4", ft4, atoi("words and 987"));
+    assert_int("atoi test 5", ft5, atoi("--23468"));
+}
+
+void test_strnstr()
+{
+    // ft_strnstr(input, needle, len)
+    char *ft1 = ft_strnstr("abcdef", "cd", 6);
+    char *ft2 = ft_strnstr("abcdef", "gh", 6);
+    char *ft3 = ft_strnstr("abcdef", "", 6);
+    char *ft4 = ft_strnstr("abcdef", "def", 2);
+    char *ft5 = ft_strnstr("abcdef", "abc", 0);
+
+    // Expected outputs
+    char *exp1 = "cdef";      // "cd" found at index 2
+    char *exp2 = NULL;        // "gh" not found
+    char *exp3 = "abcdef";    // empty needle returns full string
+    char *exp4 = NULL;        // len too short to match "def"
+    char *exp5 = NULL;        // n = 0 → cannot match
+
+    assert_str("strnstr test 1", ft1 ? ft1 : "(null)", exp1 ? exp1 : "(null)");
+    assert_str("strnstr test 2", ft2 ? ft2 : "(null)", exp2 ? exp2 : "(null)");
+    assert_str("strnstr test 3", ft3 ? ft3 : "(null)", exp3 ? exp3 : "(null)");
+    assert_str("strnstr test 4", ft4 ? ft4 : "(null)", exp4 ? exp4 : "(null)");
+    assert_str("strnstr test 5", ft5 ? ft5 : "(null)", exp5 ? exp5 : "(null)");
+}
+
 // -------------------- Main --------------------
 
 int main()
@@ -162,5 +340,14 @@ int main()
     test_memmove();
     test_strlcpy();
     test_strlcat();
+    test_tolower();
+    test_toupper();
+    test_ftstrchr();
+    test_ftstrrchr();
+    test_memchr();
+    test_strncmp();
+    test_memcmp();
+    test_strnstr();
+    test_atoi();
     return 0;
 }

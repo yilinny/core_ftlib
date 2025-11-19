@@ -1,7 +1,8 @@
 FLAGS = -Wall -Werror -Wextra
-OBJS = ft_mems.o ft_strlen.o ft_ctype.o 
+OBJS = ft_mems.o ft_strlen.o ft_ctype.o ft_alpha.o ft_last.o
 LFLAGS = -L. -lft
 
+.PHONY: clean
 all: test_prog
 
 test_prog: test.o libft.a
@@ -24,5 +25,5 @@ libft.a : $(OBJS)
 test: test_prog
 	./test_prog
 
-clean
+clean:
 	rm -f $(OBJS) libft.a test.o test_prog
