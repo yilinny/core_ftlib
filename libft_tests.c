@@ -505,7 +505,22 @@ void test_split()
     i = 0; while (ft5 && ft5[i]) free(ft5[i++]); free(ft5);
 }
 
+void test_itoa()
+{
+    char *ft1 = ft_itoa(-42);
+    char *ft2 = ft_itoa(10);
+    char *ft3 = ft_itoa(0);
+    char *ft4 = ft_itoa(2147483647);
+    char *ft5 = ft_itoa(-2147483648);
 
+    assert_str("test itoa 1", ft1, "-42");
+    assert_str("test itoa 2", ft2, "10");
+    assert_str("test itoa 3", ft3, "0");
+    assert_str("test itoa 4", ft4, "2147483647");
+    assert_str("test itoa 5", ft5, "-2147483648");
+
+    free (ft1); free (ft2); free(ft3); free(ft4);
+}
 // -------------------- Main --------------------
 
 int main()
@@ -536,5 +551,6 @@ int main()
     test_strjoin();
     test_strtrim();
     test_split();
+    test_itoa();
     return 0;
 }
