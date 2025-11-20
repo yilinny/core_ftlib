@@ -521,6 +521,55 @@ void test_itoa()
 
     free (ft1); free (ft2); free(ft3); free(ft4);
 }
+
+void test_ft_putchar()
+{
+    printf("testing putchar");
+    ft_putchar_fd('a', 1);
+    printf("\n");
+
+    ft_putchar_fd('2', 1);
+    printf("putchar end\n");
+}
+
+void test_ft_putnbr()
+{
+    printf("testing putnbr");
+    ft_putnbr_fd(123,1);
+    printf("\n");
+
+    ft_putnbr_fd(42, 1);
+    printf("\n");
+
+    ft_putnbr_fd(10, 1);
+    printf("\n");
+
+    ft_putnbr_fd( -2147483648, 1);
+    printf("\n");
+    ft_putnbr_fd( 2147483647, 1);
+    printf("end putnbr\n");
+
+}
+
+void test_ft_putstr()
+{
+    printf("test putstr");
+    ft_putstr_fd("abc", 1);
+    printf("\n");
+
+    ft_putstr_fd("123\n", 1);
+    printf("end putstr\n");
+}
+
+void test_ft_putendl()
+{
+    printf("test putendl");
+    ft_putendl_fd("abc", 1);
+    printf("\n");
+
+    ft_putendl_fd("abc\n", 1);
+    printf("end test\n");
+}
 // -------------------- Main --------------------
 
 int main()
@@ -552,5 +601,9 @@ int main()
     test_strtrim();
     test_split();
     test_itoa();
+    test_ft_putchar();
+    test_ft_putendl();
+    test_ft_putnbr();
+    test_ft_putstr();
     return 0;
 }

@@ -1,5 +1,5 @@
 FLAGS = -Wall -Werror -Wextra
-OBJS = ft_mems.o ft_strlen.o ft_ctype.o ft_alpha.o ft_last.o ft_additional.o ft_itoa.o
+OBJS = ft_mems.o ft_strlen.o ft_ctype.o ft_alpha.o ft_last.o ft_additional.o ft_itoa.o ft_fns.o ft_output.o
 LFLAGS = -L. -lft
 
 .PHONY: clean

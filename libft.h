@@ -26,13 +26,17 @@ char *ft_strnstr(const char *big, const char *small, size_t len);
 int ft_atoi (const char *s);
 void *ft_calloc(size_t n, size_t esize);
 char *ft_strdup (const char *s);
-char *ft_substr(const char *s, unsigned int start, size_t len);
-char *ft_strjoin (const char *s1, const char *s2);
-char *ft_strtrim(const char *s1, const char *set);
-char **ft_split (const char *s, char c);
+char *ft_substr(char const *s, unsigned int start, size_t len);
+char *ft_strjoin (char const *s1, char const *s2);
+char *ft_strtrim(char const *s1, char const *set);
+char **ft_split (char const *s, char c);
 char *ft_itoa(int n);
-
-
+char *ft_strmapi(char const *s, char (*f)(unsigned int, char));
+void ft_striteri(char *s, void (*f)(unsigned int, char *));
+void ft_putchar_fd (char c, int fd);
+void ft_putstr_fd(char *s, int fd);
+void ft_putendl_fd(char *s, int fd);
+void ft_putnbr_fd(int n, int fd);
 // list of commands
 /*
  * isalpha - checks for an alphabetic character
@@ -60,4 +64,5 @@ char *ft_itoa(int n);
  * calloc - allocates space for an array with n number of elements, each with size esize if n or esize = 0,then calloc returns a unique pointer value which can be passed to free. returns a NULL pointer if insufficient memory Calloc initializes the memory with 0. if n *elsize = int overflow, then calloc returns an error (null)
  * strdup - returns a pointer to a new string, which is duplicate of string s, returns NULL if insufficient memory 
  */
+
 #endif
