@@ -1,7 +1,8 @@
 #include <stdlib.h>
 #include <stdint.h>
+#include "libft.h"
 
-void *ft_memchr(const char *s, int c, size_t n)
+void *ft_memchr(const void *s, int c, size_t n)
 {
     size_t index;
     index = 0;
@@ -9,7 +10,7 @@ void *ft_memchr(const char *s, int c, size_t n)
     final = (unsigned char *)s;
     while (index < n)
     {
-        if ((unsigned char)s[index] == (unsigned char)c)
+        if ((unsigned char)final[index] == (unsigned char)c)
             return ((void *)(final + index));
         index++;
     }
@@ -66,19 +67,15 @@ void *ft_calloc(size_t n, size_t esize)
     size_t i;
 
     if (n == 0 || esize == 0)
-        return (malloc(1));
+        return (malloc(0));
     if (n > SIZE_MAX / esize)
         return (NULL);
     i = 0;
     final = malloc(n * esize);
     if (final == NULL)
         return (final);
-    while (i < n * esize)
-    {
-        final[i] = 0;
-        i++;
-    }
-    return ((void *) final);
+    ft_memset(final, 0, n * esize);
+    return (final);
 }
 
 char *ft_strdup(const char *s)

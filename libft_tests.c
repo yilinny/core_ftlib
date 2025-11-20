@@ -155,10 +155,10 @@ void test_strlcpy()
 
 void test_strlcat()
 {
-    char dest[10] = "Hi";
-    size_t ret = ft_strlcat(dest, "There", sizeof(dest));
-    assert_str("strlcat content", dest, "HiThere");
-    assert_size_t("strlcat return", ret, 7);
+    char dest[20] = "Hello";
+    size_t ret = ft_strlcat(dest, "banana", sizeof(dest));
+    assert_str("strlcat content", dest, "Hellobanana");
+    assert_size_t("strlcat return", ret, 11);
 }
 
 void test_tolower()
@@ -324,6 +324,188 @@ void test_strnstr()
     assert_str("strnstr test 5", ft5 ? ft5 : "(null)", exp5 ? exp5 : "(null)");
 }
 
+void test_strdup()
+{
+    // ft_strdup(input)
+    char *ft1 = ft_strdup("hello");
+    char *ft2 = ft_strdup("");
+    char *ft3 = ft_strdup("  abc 123!? ");
+    char *ft4 = ft_strdup("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"); // long
+    char *ft5 = ft_strdup("hi\0hi");
+
+    // Expected outputs
+    char *exp1 = strdup("hello");
+    char *exp2 = strdup("");
+    char *exp3 = strdup("  abc 123!? ");
+    char *exp4 = strdup("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    char *exp5 = strdup("hi\0hi");
+
+    assert_str("strdup test 1", ft1 ? ft1 : "(null)", exp1 ? exp1 : "(null)");
+    assert_str("strdup test 2", ft2 ? ft2 : "(null)", exp2 ? exp2 : "(null)");
+    assert_str("strdup test 3", ft3 ? ft3 : "(null)", exp3 ? exp3 : "(null)");
+    assert_str("strdup test 4", ft4 ? ft4 : "(null)", exp4 ? exp4 : "(null)");
+    assert_str("strdup test 5", ft5 ? ft5 : "(null)", exp5 ? exp5 : "(null)");
+
+
+    // Free all allocated memory
+    free(ft1); free(exp1);
+    free(ft2); free(exp2);
+    free(ft3); free(exp3);
+    free(ft4); free(exp4);
+    free (ft5); free(exp5);
+}
+
+void test_substr()
+{
+    //ft_substr
+    char *ft1 = ft_substr("hello", 1 , 2);
+    char *ft2 = ft_substr("hello", 0, 5);
+    char *ft3 = ft_substr("hello", 3, 6);
+    char *ft4 = ft_substr("hello", 6, 2);
+    char *ft5 = ft_substr("hello", 1, 0);
+
+    // Expected outputs
+    char *exp1 = "el";
+    char *exp2 = "hello";
+    char *exp3 = "lo";
+    char *exp4 = "";
+    char *exp5 = "";
+
+    assert_str("substr test 1", ft1 ? ft1 : "(null)", exp1 ? exp1 : "(null)");
+    assert_str("substr test 2", ft2 ? ft2 : "(null)", exp2 ? exp2 : "(null)");
+    assert_str("substr test 3", ft3 ? ft3 : "(null)", exp3 ? exp3 : "(null)");
+    assert_str("substr test 4", ft4 ? ft4 : "(null)", exp4 ? exp4 : "(null)");
+    assert_str("substr test 5", ft5 ? ft5 : "(null)", exp5 ? exp5 : "(null)");
+
+
+    // Free all allocated memory
+    free(ft1); 
+    free(ft2); 
+    free(ft3); 
+    free(ft4); 
+    free (ft5);
+}
+
+void test_strjoin()
+{
+    //ft_strjoin
+    char *ft1 = ft_strjoin("hello", "banana");
+    char *ft2 = ft_strjoin("hello", "");
+    char *ft3 = ft_strjoin("", "hello");
+
+    // Expected outputs
+    char *exp1 = "hellobanana";
+    char *exp2 = "hello";
+    char *exp3 = "hello";
+
+    assert_str("strjoin test 1", ft1 ? ft1 : "(null)", exp1 ? exp1 : "(null)");
+    assert_str("strjoin test 2", ft2 ? ft2 : "(null)", exp2 ? exp2 : "(null)");
+    assert_str("strjoin test 3", ft3 ? ft3 : "(null)", exp3 ? exp3 : "(null)");
+
+    // Free all allocated memory
+    free(ft1); 
+    free(ft2); 
+    free(ft3); 
+}
+
+void test_strtrim()
+{
+    //input
+    char *ft1 = ft_strtrim("hello", "banana");
+    char *ft2 = ft_strtrim("hello", "");
+    char *ft3 = ft_strtrim("", "hello");
+    char *ft4 = ft_strtrim("hello", "le");
+
+    // Expected outputs
+    char *exp1 = "hello";
+    char *exp2 = "hello";
+    char *exp3 = "";
+    char *exp4 = "ho";
+
+    assert_str("strtrim test 1", ft1 ? ft1 : "(null)", exp1 ? exp1 : "(null)");
+    assert_str("strtrim test 2", ft2 ? ft2 : "(null)", exp2 ? exp2 : "(null)");
+    assert_str("strtrim test 3", ft3 ? ft3 : "(null)", exp3 ? exp3 : "(null)");
+    assert_str("strtrim test 4", ft4? ft4 : "(null)", exp4 ? exp4 : "(null)");
+
+    // Free all allocated memory
+    free(ft1); 
+    free(ft2); 
+    free(ft3); 
+    free(ft4);
+}
+
+void assert_split(const char *msg, char **ft_arr, char **exp_arr)
+{
+    printf("%s\n", msg);
+
+    int i = 0;
+    while (exp_arr[i] || ft_arr[i])  // loop until both hit NULL
+    {
+        if (!exp_arr[i] || !ft_arr[i])
+        {
+            printf("  ❌ Mismatch: one of the arrays ended early\n");
+            printf("%s", exp_arr[i]);
+            printf("%s", ft_arr[i]);
+            return;
+        }
+        assert_str("  element", ft_arr[i], exp_arr[i]);
+        i++;
+    }
+
+    printf("  ✓ OK\n");
+}
+
+void test_split()
+{
+    // ------------------
+    // Test case 1: basic split
+    // ------------------
+    char **ft1 = ft_split("hello world test", ' ');
+    char *exp1[] = {"hello", "world", "test", NULL};
+    assert_split("split test 1", ft1, exp1);
+
+    // ------------------
+    // Test case 2: multiple consecutive delimiters
+    // ------------------
+    char **ft2 = ft_split("a--b---c-", '-');
+    char *exp2[] = {"a", "b", "c", NULL};
+    assert_split("split test 2", ft2, exp2);
+
+    // ------------------
+    // Test case 3: empty string input
+    // ------------------
+    char **ft3 = ft_split("", ',');
+    char *exp3[] = {NULL};   // no substrings
+    assert_split("split test 3", ft3, exp3);
+
+    // ------------------
+    // Test case 4: delimiter not found
+    // ------------------
+    char **ft4 = ft_split("abcdef", ' ');
+    char *exp4[] = {"abcdef", NULL};
+    assert_split("split test 4", ft4, exp4);
+
+    // ------------------
+    // Test case 5: string is all delimiters (edge case)
+    // ------------------
+    char **ft5 = ft_split(";;;;;;", ';');
+    char *exp5[] = {NULL};
+    assert_split("split test 5", ft5, exp5);
+
+
+    // ------------------
+    // Free all allocated memory
+    // ------------------
+    int i;
+
+    i = 0; while (ft1 && ft1[i]) free(ft1[i++]); free(ft1);
+    i = 0; while (ft2 && ft2[i]) free(ft2[i++]); free(ft2);
+    i = 0; while (ft3 && ft3[i]) free(ft3[i++]); free(ft3);
+    i = 0; while (ft4 && ft4[i]) free(ft4[i++]); free(ft4);
+    i = 0; while (ft5 && ft5[i]) free(ft5[i++]); free(ft5);
+}
+
+
 // -------------------- Main --------------------
 
 int main()
@@ -349,5 +531,10 @@ int main()
     test_memcmp();
     test_strnstr();
     test_atoi();
+    test_strdup();
+    test_substr();
+    test_strjoin();
+    test_strtrim();
+    test_split();
     return 0;
 }
