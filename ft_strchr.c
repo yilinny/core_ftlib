@@ -6,7 +6,7 @@
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 09:10:22 by yi-ltan           #+#    #+#             */
-/*   Updated: 2025/11/23 09:10:22 by yi-ltan          ###   ########.fr       */
+/*   Updated: 2025/11/24 10:23:06 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ char *ft_strchr(const char *s, int c)
 
 	index = 0;
 	final = (char *)s;
-	if (c == NULL)
+	if (!c)
 		return (NULL);
-
 	while (s[index] != '\0')
 	{
 		if (s[index] == (unsigned char)c)

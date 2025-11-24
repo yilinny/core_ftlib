@@ -6,7 +6,7 @@
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 09:44:11 by yi-ltan           #+#    #+#             */
-/*   Updated: 2025/11/23 09:44:11 by yi-ltan          ###   ########.fr       */
+/*   Updated: 2025/11/24 10:22:08 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	i = 0;
 	j = 0;
-	final = (char *)malloc(ft_strlen(s1) + 1);
+	final = (char *)malloc(trimmed_length(s1, set) + 1);
 	while (s1[i])
 	{
 		if (ft_strchr(set, (int)s1[i]) == NULL)

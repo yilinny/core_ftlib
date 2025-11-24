@@ -6,11 +6,11 @@
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 08:49:31 by yi-ltan           #+#    #+#             */
-/*   Updated: 2025/11/23 08:49:31 by yi-ltan          ###   ########.fr       */
+/*   Updated: 2025/11/24 10:20:48 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 size_t ft_strlcat(char *dest, const char *src, size_t size)
 {
@@ -18,7 +18,7 @@ size_t ft_strlcat(char *dest, const char *src, size_t size)
 	size_t i;
 	size_t j;
 
-	d_size = strlen(dest);
+	d_size = ft_strlen(dest);
 	if (d_size >= size)
 		return (size);
 	i = d_size;
@@ -30,5 +30,5 @@ size_t ft_strlcat(char *dest, const char *src, size_t size)
 		j++;
 	}
 	dest[i] = '\0';
-	return (d_size + strlen(src));
+	return (d_size + ft_strlen(src));
 }
