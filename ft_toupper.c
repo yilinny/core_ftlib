@@ -6,13 +6,13 @@
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 09:09:24 by yi-ltan           #+#    #+#             */
-/*   Updated: 2025/11/23 09:09:24 by yi-ltan          ###   ########.fr       */
+/*   Updated: 2025/11/24 11:40:58 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_toupper(int c)
+int	ft_toupper(int c)
 {
 	if (c >= 'a' && c <= 'z')
 		return (c - 32);

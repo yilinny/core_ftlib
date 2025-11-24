@@ -6,13 +6,13 @@
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 09:09:52 by yi-ltan           #+#    #+#             */
-/*   Updated: 2025/11/23 09:09:52 by yi-ltan          ###   ########.fr       */
+/*   Updated: 2025/11/24 11:33:01 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_tolower(int c)
+int	ft_tolower(int c)
 {
 	if (c >= 'A' && c <= 'Z')
 		return (c + 32);

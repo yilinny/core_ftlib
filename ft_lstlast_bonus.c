@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 09:50:07 by yi-ltan           #+#    #+#             */
-/*   Updated: 2025/11/24 11:29:01 by yi-ltan          ###   ########.fr       */
+/*   Created: 2025/11/24 11:06:36 by yi-ltan           #+#    #+#             */
+/*   Updated: 2025/11/24 11:46:32 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+t_list	*ft_lstlast(t_list *lst)
 {
-	if (!s)
-		return ;
-	write (fd, s, ft_strlen(s));
+	t_list	*final;
+
+	final = lst;
+	while (final && final-> next != NULL)
+	{
+		final = final-> next;
+	}
+	return (final);
 }

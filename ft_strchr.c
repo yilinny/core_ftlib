@@ -6,16 +6,16 @@
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 09:10:22 by yi-ltan           #+#    #+#             */
-/*   Updated: 2025/11/24 10:30:04 by yi-ltan          ###   ########.fr       */
+/*   Updated: 2025/11/24 11:29:22 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-	int index;
-	char *final;
+	int		index;
+	char	*final;
 
 	index = 0;
 	final = (char *)s;

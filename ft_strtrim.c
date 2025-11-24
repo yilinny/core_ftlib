@@ -6,13 +6,13 @@
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 09:44:11 by yi-ltan           #+#    #+#             */
-/*   Updated: 2025/11/24 10:39:59 by yi-ltan          ###   ########.fr       */
+/*   Updated: 2025/11/24 11:32:34 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	trimmed_length (char const *s1, char const *set)
+static int	trimmed_length(char const *s1, char const *set)
 {
 	int	final;
 	int	i;
@@ -27,6 +27,7 @@ static int	trimmed_length (char const *s1, char const *set)
 	}
 	return (final);
 }
+
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*final;
