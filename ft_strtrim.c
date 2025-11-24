@@ -6,7 +6,7 @@
 /*   By: yi-ltan <yi-ltan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 09:44:11 by yi-ltan           #+#    #+#             */
-/*   Updated: 2025/11/24 10:22:08 by yi-ltan          ###   ########.fr       */
+/*   Updated: 2025/11/24 10:39:59 by yi-ltan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	trimmed_length (char const *s1, char const *set)
 			final ++;
 		i ++;
 	}
-	return (i);
+	return (final);
 }
 char	*ft_strtrim(char const *s1, char const *set)
 {
