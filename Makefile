@@ -5,6 +5,8 @@ OBJS = $(SRC:c=o)
 BONUS_S = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c
 BONUS_O = $(BONUS_S:c=o)
 
+.PHONY: clean fclean re
+
 all: $(NAME)
 
 $(NAME) : $(OBJS)
@@ -15,7 +17,7 @@ bonus: $(OBJS) $(BONUS_O)
 	ar rcs $(NAME) $(OBJS) $(BONUS_O)
 	@echo "bonus added"
 
-%.o : %.c
+%.o : %.c libft.h
 	cc $(FLAGS) -c $< -o $@
 
 fclean: clean 
